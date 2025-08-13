@@ -43,6 +43,7 @@ class ToolExecutor(Runnable):
             args = eval(tool_call["arguments"])  # use safer parse in real code
             # call the tool
             result = await self.browser_session.session.call_tool(name, args)
+            logger.info(f"result {result.content}")
             return result
         return input.content
 
@@ -135,11 +136,8 @@ class BrowserAgent:
     
         
     async def fetchDetails(self):
-        await self.processQueries("find the capital of qatar, by going to https://www.google.com")
+        await self.processQueries("Go to https://www.google.com and then search for the capital of Russia")
 
-
-
-    
     
 
 def initModel() -> ChatGoogleGenerativeAI:
